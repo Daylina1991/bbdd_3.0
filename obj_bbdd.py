@@ -61,7 +61,7 @@ class usuario():
     
     def darce_de_alta(self):
         micursor.execute("insert into from clientes (codigo, nombre, direccion, telefono, situacion, codigo_peli) values ")
-    val = ("C0011", "Dayana","Calle falsa 364", "64388378", "l","null" ,hola)
+    val = ("C0011", "Dayana","Calle falsa 364", "64388378", "l","null")
     micursor.execute(val)
     miconexion.commit()
         
