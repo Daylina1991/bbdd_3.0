@@ -92,6 +92,6 @@ class usuario():
     def devolver_peli (self):
         pass        
 
-# objeto = usuario()
-# objeto.ver_todas_las_pelis()
+objeto = usuario()
+objeto.ver_todas_las_pelis()
 
