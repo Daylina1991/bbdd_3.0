@@ -1,4 +1,4 @@
-from bbdd_ import miconexion, micursor
+from bbdd import miconexion, micursor
 
 
 
