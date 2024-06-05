@@ -67,7 +67,7 @@ class usuario():
         
 
     def darce_de_baja(self):
-        micursor.execute("delete from clientes where id = 4")
+        micursor.execute("DELETE FROM clientes where id = 4")
         resultado =micursor.fetchall()
     def ver_sus_datos(self):
         micursor.execute("select  * from clientes  where id= 3")
@@ -79,7 +79,9 @@ class usuario():
         resultado =micursor.fetchall()
         for i in resultado:
             print(i)
-
+            
+    #gestion_pelis
+    
     def ver_solo_disponibles(self):
         micursor.execute("select * from peliculas where  situacion = 'l'")
         resultado =micursor.fetchall()
