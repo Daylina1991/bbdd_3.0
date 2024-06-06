@@ -1,7 +1,4 @@
 from bbdd import miconexion, micursor
-
-
-
 #clase user                     
 #atributos                    
 #metodos                        
@@ -59,29 +56,37 @@ class usuario():
     def set_codigo(self, newcodigo_peli):
         self.__codigo_peli = newcodigo_peli
     
-    def darce_de_alta(self):
-        micursor.execute("insert into from clientes (codigo, nombre, direccion, telefono, situacion, codigo_peli) values ")
-    val = ("C0011", "Dayana","Calle falsa 364", "64388378", "l","null")
-    micursor.execute(val)
-    miconexion.commit()
+    def darse_de_alta(self):
+        sql = "insert into from clientes (codigo, nombre, direccion, telefono, situacion, codigo_peli) values  (%s, %s,  %s, %s, %s, %s)"
+        val = (self.get_codigo(), self.get_nombre(), self.get_direccion(), self.get_telefono(), self.get_situacion(),self.get_codigo_peli())
+        micursor.execute(sql, val)
+        miconexion.commit()
         
 
-    def darce_de_baja(self):
-        micursor.execute("DELETE FROM clientes where id = 4")
-        resultado =micursor.fetchall()
-    def ver_sus_datos(self):
-        micursor.execute("select  * from clientes  where id= 3")
-    def modificar_datos(self):
-        micursor.execute("update  clientes set nombre = 'Maria' where id = 3 ")
+    def darse_de_baja(self):
+        micursor.execute(f"delete from clientes  where codigo = {self.get_codigo()}")
 
+    def ver_sus_datos(self):
+        micursor.execute(f"select  * from clientes  where codigo = {self.get_codigo()}")
+
+
+    def modificar_datos(self,n,newdato):
+        if n == 1:
+            micursor.execute(f"update  clientes set direccion = {newdato} where  codigo ={self.get_codigo()}")
+        elif n == 2:
+            micursor.execute(f"update clientes set telefono = {newdato} whre telefono ={self.get_telefono()}")
+        else:
+            ("Opción no válida, por favor intente de nuevo.")
+
+    
+            
+    #gestion_pelis
     def ver_todas_las_pelis (self):
         micursor.execute("select * from peliculas ")
         resultado =micursor.fetchall()
         for i in resultado:
             print(i)
-            
-    #gestion_pelis
-    
+
     def ver_solo_disponibles(self):
         micursor.execute("select * from peliculas where  situacion = 'l'")
         resultado =micursor.fetchall()
