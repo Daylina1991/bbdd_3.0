@@ -38,6 +38,6 @@ val =[
     ("C009", "Star Wars", "Ciencia ficción", "l"),
     ("C010", "Jurassic Park", "Aventura", "l")
 ]
-micursor.executemany(sql, val )
+micursor.executemany(sql, val ) hola
 miconexion.commit()
 
