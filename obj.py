@@ -51,15 +51,16 @@ class usuario():
         
 
     def darse_de_baja(self):
+        micursor.execute(f"select situacion from clientes where  codigo ='{self.get_codigo}'")
         micursor.execute(f"update  clientes  set situacion = 'B' where codigo = '{self.get_codigo()}'")
         miconexion.commit()
         
         
 
-    def ver_datos(self, tabla, ):
-        micursor.execute(f"select  * from clientes  where codigo = {self.get_codigo()}")
+    def ver_datos(self):
+        micursor.execute(f"select  * from clientes  where codigo = '{self.get_codigo()}'")
         datos = micursor.fetchall()
-        for i in range (len(datos)):
+        for i in datos:
             print(i)
         
         
@@ -67,12 +68,14 @@ class usuario():
 
     def modificarDatos(self,n,newdato):
         if n == 1:
-            micursor.execute(f"update  clientes set direccion = {newdato} where  codigo ={self.get_codigo()}")
+            micursor.execute(f"update  clientes set direccion ='{newdato}' where  codigo ='{self.get_codigo()}'")
+            miconexion.commit()
         elif n == 2:
-            micursor.execute(f"update clientes set telefono = {newdato} where telefono ={self.get_codigo()}")
+            micursor.execute(f"update clientes set telefono = '{newdato}' where codigo ='{self.get_codigo()}'")
+            miconexion.commit()
         else:
             ("Opción no válida, por favor intente de nuevo.")
-        miconexion.commit()
+       
 
     
     

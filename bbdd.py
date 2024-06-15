@@ -1,6 +1,6 @@
 import mysql.connector
 
-miconexion = mysql.connector.connect(host="localhost", user ="root", password ="", database="proyecto_bbdd")
+miconexion = mysql.connector.connect(host="localhost", user ="root", password ="")
 micursor = miconexion.cursor()
 
 #comentas
