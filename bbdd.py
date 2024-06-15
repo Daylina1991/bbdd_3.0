@@ -1,8 +1,9 @@
 import mysql.connector
 
-miconexion = mysql.connector.connect(host="localhost", user ="root", password ="")
-
+miconexion = mysql.connector.connect(host="localhost", user ="root", password ="", database="proyecto_bbdd")
 micursor = miconexion.cursor()
+
+#comentas
 micursor.execute("drop database  if exists proyecto_bbdd")
 micursor.execute("create database proyecto_bbdd")
 micursor.execute("use proyecto_bbdd")
@@ -36,8 +37,8 @@ val =[
     ("C007", "Forrest Gump", "Drama", "a"),
     ("C008", "The Godfather", "Crimen", "l"),
     ("C009", "Star Wars", "Ciencia ficción", "l"),
-    ("C010", "Jurassic Park", "Aventura", "l")
+    ("C010", "Jurassic Park", "Aventuraa", "l")
 ]
-micursor.executemany(sql, val ) hola
+micursor.executemany(sql, val ) 
 miconexion.commit()
 
