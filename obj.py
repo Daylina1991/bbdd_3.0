@@ -82,8 +82,9 @@ class usuario():
     
             
     #gestion_pelis
-    def ver_todas_las_pelis (self):
-        micursor.execute("select * from peliculas ")
+    def ver_todas_las_pelis (self):   #pelis corregido
+        print("PELICULAS\n")
+        micursor.execute("select nombre_peli from peliculas")
         resultado =micursor.fetchall()
         for i in resultado:
             print(i)
@@ -91,25 +92,32 @@ class usuario():
             
 
     def ver_solo_disponibles(self):
-        micursor.execute("select * from peliculas where  situacion = 'l'")
+        print("PELICULAS DISPONIBLES\n")
+        micursor.execute("select nombre_peli  from peliculas where  situacion = 'l'")#pelis_corregido
         resultado =micursor.fetchall()
         for i in resultado:
             print(i)
                      
             
 
-    def alquilar_peli(self,clientes,peliculas):
-        micursor.execute(f"update clientes set situacion ='a' where id ={clientes}")
-        micursor.execute(f"update clientes set codigo = 'y' where id ={clientes}")
-        micursor.execute(f"update peliculas set situacion dni ='a' where  id = {peliculas}")
-        micursor.execute(f"update peliculas set dni = 'x' where id ={peliculas}")
+    def alquilar_peli(self,id_cliente,id_pelicula):
+        micursor.execute(f"update clientes set situacion ='a' where id ={id_pelicula}")
+        micursor.execute(f"update clientes set codigo = 'y' where id ={id_cliente}")
+        micursor.execute(f"update peliculas set situacion dni ='a' where  id = {id_pelicula}")
+        micursor.execute(f"update peliculas set dni = 'x' where id ={id_pelicula}")
         miconexion.commit()
         
            
         
-    def devolver_peli (self,x ,y):
-        micursor.execute(f"update clientes set situacion ='l' where id ={x}")
-        micursor.execute(f"update clientes set codigo = 'null' where id = {x}")
-        micursor.execute(f"update peliculas set situacion ='l' where id = {y}")
-        micursor.execute(f"update peliculas set dni = 'null where id = {y}")
+    def devolver_peli (self,id_cliente ,id_pelicula):
+        micursor.execute(f"update clientes set situacion ='l' where id ={id_cliente}")
+        micursor.execute(f"update clientes set codigo = 'null' where id = {id_cliente}")
+        micursor.execute(f"update peliculas set situacion ='l' where id = {id_pelicula}")
+        micursor.execute(f"update peliculas set dni = 'null where id = {id_pelicula}")
         miconexion.commit()
+        
+        
+obj = usuario("C001", "dayana", "mataderos", "1169541265")
+obj.ver_datos()
+
+

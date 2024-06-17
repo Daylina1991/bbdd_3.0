@@ -8,13 +8,23 @@ def menuPrincipal():  #menu_principal
     # while on == 1:
         print("\nBIENVENIDO A LA APLICACION DE VIDEO/CLUB\n")
         try:
-            cliente =int(input("ELIJA UNA OPCION: \n1.iniciar sesion\n2-registrarse\n3-salir\n"))
+            cliente =int(input("ELIJA UNA OPCION: \n1.Iniciar sesion\n2-Registrarse\n3-Salir\n"))
             if cliente == 1:
-                opcion1 =str(input("ingrese su codigo: \n"))
+                opcion1 =str(input("ingrese su Codigo:\n"))
                 micursor.execute(f"select * from clientes  where  codigo ='{opcion1}'")
                 result = micursor.fetchall()
                 for i in result:
                     print(i)
+                opcion2 =str(input("Ingrese su Nombre\n"))
+                micursor.execute(f"select * from clientes  where  nombre ='{opcion2}'")
+                result = micursor.fetchall()
+                for i in result:
+                    print(i)
+                    # if i == result:
+                    #     print(i)
+                    # else:
+                    #     print("Ingrese un nombre registrado")
+                    
                 #user1= usuario(i[1],i[2],i[3],i[4])
                 user1 = usuario(i[1],i[2],i[3],i[4])
                 opcion =int(input("OPCIONES:\n1-Menu de usuario\n2-Menu peliculas\n3-Salir \n"))
@@ -82,7 +92,7 @@ def menuUsuario(usuario1):  #menu_usuario
             sql = (f"select * from clientes where codigo = '{user}'")
             micursor.execute(sql)
             result = micursor.fetchall()
-            for i in result:
+            for i in result: 
                 for j in i:
                     lista.append(j)
             user1 = usuario(lista[1],lista[2],lista[3],lista[4])
