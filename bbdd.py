@@ -12,7 +12,7 @@ micursor.execute("create table peliculas(id int primary key auto_increment, codi
 
 sql = "INSERT INTO clientes(codigo, nombre, direccion, telefono, situacion) VALUES (%s, %s, %s, %s, %s)"
 val =[
-    ("C001", "Juan", "Calle Falsa 123", "34151234", "l"),
+    ("C001", "Dayana", "Murguiondo 123", "34151234", "l"),
     ("C002", "María", "Avenida Siempre Viva 742", "34155678", "l"),
     ("C003", "Carlos", "Calle Principal 456", "34158765", "l"),
     ("C004", "Ana", "Boulevard de los Sueños 890", "34154321", "l"),

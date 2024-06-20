@@ -3,7 +3,7 @@
 def traerDatos(comodin):
     cursor.execute(f"select * from{comodin}")   # comodin para utilizar de manera generica
     variable = cursor.fetchall()  #imprime todo,se utiliza como un print
-    for i in range len(variable):   #len cuenta
+    for i in range #len(variable):   #len cuenta
         print(i)
 
 
@@ -37,4 +37,7 @@ def devolver(x,y):
 """micursor.execute("UPDATE clientes SET nombre = 'Helio' WHERE id =1")
 micursor.execute("DELETE  FROM peliculas WHERE id = 2")
 micursor.execute("SELECT  nombre FROM  peliculas")"""
+
+
+
 

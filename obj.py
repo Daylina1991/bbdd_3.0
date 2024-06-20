@@ -13,11 +13,13 @@ class usuario():
         return self.__codigo
     def set_codigo(self,newcodigo):
         self.__codigo = newcodigo
+        
 
     def get_nombre(self):
         return self.__nombre
     def set_nombre(self, newnombre):
         self.__nombre = newnombre
+        
 
     def get_direccion(self):
         return self.__direccion
@@ -51,7 +53,7 @@ class usuario():
         
 
     def darse_de_baja(self):
-        micursor.execute(f"select situacion from clientes where  codigo ='{self.get_codigo}'")
+        micursor.execute(f"select situacion from clientes where  codigo ='{self.get_codigo()}'")
         micursor.execute(f"update  clientes  set situacion = 'B' where codigo = '{self.get_codigo()}'")
         miconexion.commit()
         
@@ -75,8 +77,7 @@ class usuario():
             miconexion.commit()
         else:
             ("Opción no válida, por favor intente de nuevo.")
-       
-
+            
     
     
     
@@ -84,7 +85,7 @@ class usuario():
     #gestion_pelis
     def ver_todas_las_pelis (self):   #pelis corregido
         print("PELICULAS\n")
-        micursor.execute("select nombre_peli from peliculas")
+        micursor.execute("select nombre_peli, genero  from peliculas")
         resultado =micursor.fetchall()
         for i in resultado:
             print(i)
@@ -116,8 +117,10 @@ class usuario():
         micursor.execute(f"update peliculas set dni = 'null where id = {id_pelicula}")
         miconexion.commit()
         
-        
-obj = usuario("C001", "dayana", "mataderos", "1169541265")
-obj.ver_datos()
+# obj = usuario("C001", "dayana", "mataderos", "1169541265")
+# print(obj.get_telefono())
+# obj.set_telefono("142574")
+# print(obj.get_telefono())
+#obj =usuario()
 
 

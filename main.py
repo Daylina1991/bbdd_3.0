@@ -1,14 +1,14 @@
 
 from obj import usuario 
-from bbdd import micursor,miconexion
+from bbdd import  miconexion, micursor
 
 
 def menuPrincipal():  #menu_principal
     # on = 1
     # while on == 1:
-        print("\nBIENVENIDO A LA APLICACION DE VIDEO/CLUB\n")
+        print("\nBIENVENIDO A LA APLICACION DE VIDEO/CLUB")
         try:
-            cliente =int(input("ELIJA UNA OPCION: \n1.Iniciar sesion\n2-Registrarse\n3-Salir\n"))
+            cliente =int(input("ELIJA UNA OPCION: \n\n1.Iniciar sesion\n2-Registrarse\n3-Salir\n"))
             if cliente == 1:
                 opcion1 =str(input("ingrese su Codigo:\n"))
                 micursor.execute(f"select * from clientes  where  codigo ='{opcion1}'")
@@ -32,7 +32,8 @@ def menuPrincipal():  #menu_principal
                     print("Este es el menu usuario ")
                     menuUsuario(user1)
                 elif opcion == 2:
-                    print("Este es el menu Peliculas")
+                    print("Este es el menu Peliculas")#menu peliculas
+                    
                 elif opcion == 3:
                     print("Gracias por usar la aplicacion")
                     quit() 
@@ -53,6 +54,7 @@ def menuPrincipal():  #menu_principal
                     menuUsuario(user1)
                 elif opcion == 2:
                     print("Este es el menu Peliculas")
+                    menuPeliculas()
                 elif opcion == 3:
                     print("Gracias por usar la aplicacion")
                     quit() 
@@ -83,10 +85,10 @@ def menuUsuario(usuario1):  #menu_usuario
             dire=int(input("Opciones:\n1-Modificar Direccion\n2-Modificar telefono\n"))
             newdato = str(input("Ingrese un nuevo dato\n"))
             usuario1.modificarDatos(dire,newdato)
-        elif modi == 3:
-            pass
+        elif modi == 3:#completar#darse_de_baja
+            usuario1.darse_de_baja()
         
-        elif modi  == 4:    #darse_de_baja
+        elif modi  == 3:    
             lista =[]
             user = str(input("ingrese su codigo: "))
             sql = (f"select * from clientes where codigo = '{user}'")
@@ -98,9 +100,9 @@ def menuUsuario(usuario1):  #menu_usuario
             user1 = usuario(lista[1],lista[2],lista[3],lista[4])
             user1.darse_de_baja()
             
-        elif modi == 5:
+        elif modi == 4:
             pass
-        elif modi == 6:
+        elif modi == 5:
             pass
         else:
             print("Debe ingresar una opcion correcta\n")
@@ -112,19 +114,19 @@ def menuUsuario(usuario1):  #menu_usuario
             
          
 
-def menuPeliculas():  #menu_peliculas
+def menuPeliculas(peli1):  #menu_peliculas
     on = 1
     while on == 1:
         try:
             opcion =int(input("OPCIONES:\n1-Ver todas las peliculas\n2-Ver solo disponibles\n3-Alquilar Pelicula\n4-Devolver Pelicula\n5"))
             if opcion == 1:
-                pass  #ver_peliculas
+                peli1.ver_todas_las_pelis()#revisar
             elif opcion == 2:
-                pass
+                peli1.ver_solo_disponibles()#revisar
             elif opcion == 3:
-               pass
+               peli1.alquilar_peli()#revisar
             elif opcion == 4:
-                pass
+                peli1.devolver_peli()#revisar
                 #quit() 
                 on = 0  
             else:
