@@ -31,11 +31,11 @@ val =[
     ("C001", "Inception", "Ciencia ficción", "l"),
     ("C002", "Titanic", "Romance", "l"),
     ("C003", "The Matrix", "Acción", "l"),
-    ("C004", "Gladiator", "Drama", "l"),
-    ("C005", "Avatar", "Ciencia ficción", "l"),
+    ("C004", "Gladiator", "Drama", "A"),
+    ("C005", "Avatar", "Ciencia ficción", "A"),
     ("C006", "The Lion King", "Animación", "l"),
     ("C007", "Forrest Gump", "Drama", "a"),
-    ("C008", "The Godfather", "Crimen", "l"),
+    ("C008", "The Godfather", "Crimen", "A"),
     ("C009", "Star Wars", "Ciencia ficción", "l"),
     ("C010", "Jurassic Park", "Aventuraa", "l")
 ]

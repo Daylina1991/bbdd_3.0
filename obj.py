@@ -53,9 +53,12 @@ class usuario():
         
 
     def darse_de_baja(self):
-        micursor.execute(f"select situacion from clientes where  codigo ='{self.get_codigo()}'")
-        micursor.execute(f"update  clientes  set situacion = 'B' where codigo = '{self.get_codigo()}'")
+        micursor.execute(f"delete from clientes  where codigo  = '{self.get_codigo}'") #corregido
         miconexion.commit()
+        print("Usuario dado de baja correctamente")
+        # micursor.execute(f"select situacion from clientes where  codigo ='{self.get_codigo()}'")
+        # micursor.execute(f"update  clientes  set situacion = 'B' where codigo = '{self.get_codigo()}'")
+        #miconexion.commit()
         
         
 
@@ -63,20 +66,23 @@ class usuario():
         micursor.execute(f"select  * from clientes  where codigo = '{self.get_codigo()}'")
         datos = micursor.fetchall()
         for i in datos:
-            print(i)
+            print(i)  #corregido
         
         
 
 
-    def modificarDatos(self,n,newdato):
+    def modificarDatos(self,n,newdato): #user colocar en parametro
         if n == 1:
+            
             micursor.execute(f"update  clientes set direccion ='{newdato}' where  codigo ='{self.get_codigo()}'")
             miconexion.commit()
+            print("El telefono se modifico con exito")
         elif n == 2:
             micursor.execute(f"update clientes set telefono = '{newdato}' where codigo ='{self.get_codigo()}'")
             miconexion.commit()
+            print("La direccion no se modifico correctamente")
         else:
-            ("Opción no válida, por favor intente de nuevo.")
+            ("Opción no válida, por favor ingrese una opcion valida.") #corregido
             
     
     
@@ -85,10 +91,10 @@ class usuario():
     #gestion_pelis
     def ver_todas_las_pelis (self):   #pelis corregido
         print("PELICULAS\n")
-        micursor.execute("select nombre_peli, genero  from peliculas")
+        micursor.execute("select *  from peliculas")
         resultado =micursor.fetchall()
         for i in resultado:
-            print(i)
+            print(f"Nombre de la Pelicula {i}")
             
             
 
@@ -98,13 +104,11 @@ class usuario():
         resultado =micursor.fetchall()
         for i in resultado:
             print(i)
-                     
-            
 
     def alquilar_peli(self,id_cliente,id_pelicula):
-        micursor.execute(f"update clientes set situacion ='a' where id ={id_pelicula}")
-        micursor.execute(f"update clientes set codigo = 'y' where id ={id_cliente}")
-        micursor.execute(f"update peliculas set situacion dni ='a' where  id = {id_pelicula}")
+        micursor.execute(f"update clientes set situacion ='A' where id ={id_pelicula}")
+        micursor.execute(f"update clientes set codigo_peli = 'y' where id ={id_cliente}")
+        micursor.execute(f"update peliculas set situacion ='a' where  id = {id_pelicula}")
         micursor.execute(f"update peliculas set dni = 'x' where id ={id_pelicula}")
         miconexion.commit()
         
@@ -117,10 +121,10 @@ class usuario():
         micursor.execute(f"update peliculas set dni = 'null where id = {id_pelicula}")
         miconexion.commit()
         
-# obj = usuario("C001", "dayana", "mataderos", "1169541265")
+obj = usuario("C001", "dayana", "mataderos", "1169541265")
+print(obj) 
 # print(obj.get_telefono())
 # obj.set_telefono("142574")
 # print(obj.get_telefono())
 #obj =usuario()
-
 

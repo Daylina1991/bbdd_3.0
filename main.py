@@ -42,10 +42,10 @@ def menuPrincipal():  #menu_principal
     
                 
             elif cliente == 2:
-                codigo = str(input("ingrese un codigo de 4 digitos: "))
-                nombre = str(input("nombre: "))
-                direccion = str(input("dirección: "))
-                telefono = str(input("teléfono: "))
+                codigo = str(input("ingrese un codigo de 4 digitos:\n"))
+                nombre = str(input("nombre:\n"))
+                direccion = str(input("dirección:\n"))
+                telefono = str(input("teléfono:\n"))
                 user1 = usuario(codigo, nombre, direccion, telefono)
                 user1.darse_de_alta()
                 opcion =int(input("OPCIONES:\n1-Menu de usuario\n2-Menu peliculas\n3-Salir \n"))
@@ -82,9 +82,9 @@ def menuUsuario(usuario1):  #menu_usuario
         if modi ==1:
            usuario1.ver_datos()
         elif modi ==2:
-            dire=int(input("Opciones:\n1-Modificar Direccion\n2-Modificar telefono\n"))
-            newdato = str(input("Ingrese un nuevo dato\n"))
-            usuario1.modificarDatos(dire,newdato)
+            opciones =int(input("Opciones:\n1-Modificar Direccion\n2-Modificar telefono\n"))
+            if opciones == 1:
+               modificarDatos()
         elif modi == 3:#completar#darse_de_baja
             usuario1.darse_de_baja()
         
