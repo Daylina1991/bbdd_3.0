@@ -9,6 +9,7 @@ def menu():
             menuUser(datos)
     elif usuario ==2:
         registrarse()
+        menu()
     elif usuario ==3:
         print("GRACIAS POR USAR LA APLICACION")
         quit()#salir
@@ -52,20 +53,27 @@ def menuUser(usuario):
     opcion2 =int(input("OPCIONES:\n1-Ver sus datos\n2-Modificar sus datos\n3-Darse de baja\n4-Ver todas las peliculas\n5-Ver solo disponibles\n6-Alquilar pelicula\n7-Devolver pelicula\n8-Atras\n9-SALIR\n"))
     if opcion2 ==1:
         verDatos(usuario)#el parametro es del input de iniciar sesion
+        menuUser(usuario)
     elif opcion2 ==2:
        modificarDatos(usuario)#el parametro es del input de iniciar sesion
+       menu(usuario)
     elif opcion2 ==3:
         darsedebaja(usuario)#el parametro es del input de iniciar sesion
+        menu()
     elif opcion2 ==4:
         ver_todas_las_pelis()#ver todas las pelis
+        menuUser(usuario)
     elif opcion2 ==5:
         ver_solo_disponibles()#ver solo disponibles
+        menuUser(usuario)
     elif opcion2 ==6:
         alquilar_peli(usuario)#alquilar pelicula
+        menuUser(usuario)
     elif opcion2 ==7:
         devolver_peli(usuario)#devolver pelicula
+        menuUser(usuario)
     elif opcion2 ==8:
-        pass#atras
+        menu()#atras
     elif opcion2 ==9:
         print("GRACIAS POR USAR LA APLICACION")
         quit()#sirve salir
@@ -108,6 +116,7 @@ def ver_todas_las_pelis ():   #corregido
         print("PELICULAS\n")
         micursor.execute("select * from peliculas")
         resultado =micursor.fetchall()
+        print("CODIGO   NOMBRE  SITUACION  GENERO  SITUACION\n")
         for i in resultado:
             print(i[1], i[2])
             
@@ -115,26 +124,29 @@ def ver_solo_disponibles():
         print("PELICULAS DISPONIBLES\n")
         micursor.execute("select * from peliculas where  situacion = 'l'")
         resultado =micursor.fetchall()
+        print("CODIGO   NOMBRE  SITUACION\n")
         for i in resultado:
-            print(f"Codigo de la Pelicula  {i[1]},Nombre de la Pelicula  {i[2]}, Situacion de la Pelicula  {i[4]}")   
+            print(i[1]  , i[2]  ,i[4])
+           
+             
             
-def alquilar_peli(id_cliente,id_pelicula):
-        micursor.execute(f"update clientes set situacion ='A' where id ={id_pelicula}")
-        micursor.execute(f"update clientes set codigo_peli = 'y' where id ={id_cliente}")
-        micursor.execute(f"update peliculas set situacion ='a' where  id = {id_pelicula}")
-        micursor.execute(f"update peliculas set dni = 'x' where id ={id_pelicula}")
+def alquilar_peli(user):
+        codigo_peli =str(input("Ingrese el codigo de la pelicula que quiere alquilar\n"))
+        micursor.execute(f"update clientes set situacion ='A' where id_cliente = {user[0][0]} ")
+        micursor.execute(f"update clientes set codigo_peli = {codigo_peli} where id_cliente ={user[0][0]}")  #corregir
+        micursor.execute(f"update peliculas set situacion ='A' where  codigo = {codigo_peli}")
+        micursor.execute(f"update peliculas set codigo_cliente= '{user[0][1]}' where codigo = {codigo_peli}") #CODIGO QUE PASO EL USUARIO
         miconexion.commit()
+        print("Pelicula alquilada correctamente\n")
 
-def devolver_peli (self,id_cliente ,id_pelicula):
-        micursor.execute(f"update clientes set situacion ='l' where id ={id_cliente}")
-        micursor.execute(f"update clientes set codigo = 'null' where id = {id_cliente}")
-        micursor.execute(f"update peliculas set situacion ='l' where id = {id_pelicula}")
-        micursor.execute(f"update peliculas set dni = 'null where id = {id_pelicula}")
+def devolver_peli (user):
+        codigo_peli =str(input("Ingrese el codigo de la pelicula que quiere devolver\n"))
+        micursor.execute(f"update clientes set situacion ='L' where id ={[0][0]}") #id_user
+        micursor.execute(f"update clientes set codigo_peli = 'null' where id = {user[0][0]}")
+        micursor.execute(f"update peliculas set situacion ='L' where id = {codigo_peli}")
+        micursor.execute(f"update peliculas set codigo_cliente = null where codigo = {codigo_peli}")
         miconexion.commit()
-        
+        print("Pelicula devuelta correctamente\n")
     
-    
-    
-
 menu()
 

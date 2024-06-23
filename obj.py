@@ -48,14 +48,21 @@ class usuario():
         sql = "INSERT INTO clientes(codigo, nombre, direccion, telefono, situacion) VALUES (%s, %s, %s, %s, %s)"
         val =(self.get_codigo(), self.get_nombre(), self.get_direccion(),self.get_telefono(), self.get_situacion())
         micursor.execute(sql, val )
-        miconexion.commit() 
+        miconexion.commit()
+        print("Usuario registrado.") 
 
         
 
     def darse_de_baja(self):
-        micursor.execute(f"delete from clientes  where codigo  = '{self.get_codigo}'") #corregido
-        miconexion.commit()
-        print("Usuario dado de baja correctamente")
+        usuario1=int(input("Esta seguro que quiere darce de baja\n1-Si estoy seguro\n2-No estoy seguro\n"))
+        if usuario1 ==1:
+            micursor.execute(f"delete from clientes  where codigo  = '{self.get_codigo}'") #corregido
+            miconexion.commit()
+            print("Usuario dado de baja correctamente")
+        elif usuario1 ==2:
+           pass#menuUser(user)  #revisar
+        else:
+            print("Ingrese una opcion correcta\n")
         # micursor.execute(f"select situacion from clientes where  codigo ='{self.get_codigo()}'")
         # micursor.execute(f"update  clientes  set situacion = 'B' where codigo = '{self.get_codigo()}'")
         #miconexion.commit()
@@ -66,21 +73,23 @@ class usuario():
         micursor.execute(f"select  * from clientes  where codigo = '{self.get_codigo()}'")
         datos = micursor.fetchall()
         for i in datos:
-            print(i)  #corregido
-        
-        
+            print(i)  #corregido    
 
 
-    def modificarDatos(self,n,newdato): #user colocar en parametro
-        if n == 1:
-            
-            micursor.execute(f"update  clientes set direccion ='{newdato}' where  codigo ='{self.get_codigo()}'")
-            miconexion.commit()
-            print("El telefono se modifico con exito")
-        elif n == 2:
-            micursor.execute(f"update clientes set telefono = '{newdato}' where codigo ='{self.get_codigo()}'")
+    def modificarDatos(self,opcion): #user colocar en parametro
+        opcion = int(input("Elija una opcion:\n1-Modificar telefono.\n2-Modificar direccion\n"))
+        if opcion == 1:
+            newdireccion =str(input("Ingrese su nnueva direccion\n"))
+            micursor.execute(f"update  clientes set direccion ='{newdireccion}' where  codigo ='{self.get_codigo()}'")
             miconexion.commit()
             print("La direccion no se modifico correctamente")
+            
+        elif opcion == 2:
+            newtelefono =str(input("Ingrese su nuevo numero\n"))
+            micursor.execute(f"update clientes set telefono = '{newtelefono}' where codigo ='{self.get_codigo()}'")
+            miconexion.commit()
+            print("El telefono se modifico con exito")
+            
         else:
             ("Opción no válida, por favor ingrese una opcion valida.") #corregido
             
@@ -93,8 +102,9 @@ class usuario():
         print("PELICULAS\n")
         micursor.execute("select *  from peliculas")
         resultado =micursor.fetchall()
+        print("CODIGO   NOMBRE  SITUACION  GENERO  SITUACION\n")
         for i in resultado:
-            print(f"Nombre de la Pelicula {i}")
+            print(i)
             
             
 
@@ -102,11 +112,12 @@ class usuario():
         print("PELICULAS DISPONIBLES\n")
         micursor.execute("select nombre_peli  from peliculas where  situacion = 'l'")#pelis_corregido
         resultado =micursor.fetchall()
+        print("CODIGO   NOMBRE  SITUACION\n")
         for i in resultado:
             print(i)
 
     def alquilar_peli(self,id_cliente,id_pelicula):
-        micursor.execute(f"update clientes set situacion ='A' where id ={id_pelicula}")
+        micursor.execute(f"update clientes set situacion ='A' where id ={id_cliente}")
         micursor.execute(f"update clientes set codigo_peli = 'y' where id ={id_cliente}")
         micursor.execute(f"update peliculas set situacion ='a' where  id = {id_pelicula}")
         micursor.execute(f"update peliculas set dni = 'x' where id ={id_pelicula}")
