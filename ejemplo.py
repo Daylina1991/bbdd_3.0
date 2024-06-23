@@ -49,7 +49,7 @@ def registrarse():
     print("Usuario registrado.")
 
 def menuUser(usuario):
-    print(f"Bienvenid@ {usuario[0][2]} al menu Usuario\n") #sub indice 2 de la tupla
+    print(f"BIENVENIDO {usuario[0][2]} AL MENU USUARIO\n") #sub indice 2 de la tupla
     opcion2 =int(input("OPCIONES:\n1-Ver sus datos\n2-Modificar sus datos\n3-Darse de baja\n4-Ver todas las peliculas\n5-Ver solo disponibles\n6-Alquilar pelicula\n7-Devolver pelicula\n8-Atras\n9-SALIR\n"))
     if opcion2 ==1:
         verDatos(usuario)#el parametro es del input de iniciar sesion
@@ -81,6 +81,8 @@ def menuUser(usuario):
         print("elija una opcion correcta\n")
 
 def verDatos(user):
+    print("DATOS PERSONALES\n")
+    print("ID", " CODIGO ", " NOMBRE ", " DIRECCION ", " TELEFONO ", " SITUACION ", "CODIGO_PELI")#ID Y CODIGO PELI NO VA corregir
     for i in user:
         1
         print(i)
