@@ -26,7 +26,9 @@ def iniciarsesion():#inicio de sesion
         print("Sesion iniciada correctamente\n")
     else:
         print("ACCESO DENEGADO\n")
+        menu()
     return resultado
+    
     
     # if micursor.fetchall():
           
@@ -56,7 +58,7 @@ def menuUser(usuario):
         menuUser(usuario)
     elif opcion2 ==2:
        modificarDatos(usuario)#el parametro es del input de iniciar sesion
-       menu(usuario)
+       menu()
     elif opcion2 ==3:
         darsedebaja(usuario)#el parametro es del input de iniciar sesion
         menu()
@@ -91,16 +93,18 @@ def modificarDatos(user): #user colocar en parametro
     opcion = int(input("Elija una opcion:\n1-Modificar telefono.\n2-Modificar direccion\n"))
     if opcion == 1:
         newtelefono =str(input("Ingrese su nuevo numero\n"))
-        micursor.execute(f"update  clientes set telefono ='{newtelefono}' where  id = {user[0][0]} ") # id del usuario
+        micursor.execute(f"update  clientes set telefono ='{newtelefono}' where  id_cliente= {user[0][0]} ") # id del usuario
         miconexion.commit()
-        print("El telefono se modifico con exito")
+        print("EL TELEFONO SE MODIFICO CORRECTAMENTE\n")
     elif  opcion == 2:
         newdireccion =str(input("Ingrese su nnueva direccion\n"))
-        micursor.execute(f"update clientes set direccion = '{newdireccion}' where id ='{user[0][0]}'")# id del usuario con la tupla y subindice
+        micursor.execute(f"update clientes set direccion = '{newdireccion}' where id_cliente='{user[0][0]}'")# id del usuario con la tupla y subindice
         miconexion.commit()
-        print("La direccion  se modifico correctamente")
+        print("LA DIRECCION SE MODIFICO CCORRECTAMENTE\n")
+       
     else:
-       print("Opción no válida, por favor ingrese una opcion valida.") #corregido
+       print("Opción no válida, por favor ingrese una opcion valida.\n") #corregido
+       
        
        
 def darsedebaja(user):
@@ -134,10 +138,10 @@ def ver_solo_disponibles():
             
 def alquilar_peli(user):
         codigo_peli =str(input("Ingrese el codigo de la pelicula que quiere alquilar\n"))
-        micursor.execute(f"update clientes set situacion ='A' where id_cliente = {user[0][0]} ")
-        micursor.execute(f"update clientes set codigo_peli = {codigo_peli} where id_cliente ={user[0][0]}")  #corregir
-        micursor.execute(f"update peliculas set situacion ='A' where  codigo = {codigo_peli}")
-        micursor.execute(f"update peliculas set codigo_cliente= '{user[0][1]}' where codigo = {codigo_peli}") #CODIGO QUE PASO EL USUARIO
+        micursor.execute(f"update clientes set situacion ='A' where id_cliente = '{user[0][0]}' ")
+        micursor.execute(f"update clientes set codigo_peli = '{codigo_peli}' where id_cliente = '{user[0][0]}' ")  #corregir
+        micursor.execute(f"update peliculas set situacion ='A' where  codigo = '{codigo_peli}' ")
+        micursor.execute(f"update peliculas set codigo_cliente= '{user[0][1]}' where codigo = '{codigo_peli}' ") #CODIGO QUE PASO EL USUARIO
         miconexion.commit()
         print("Pelicula alquilada correctamente\n")
 
